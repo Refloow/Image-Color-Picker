@@ -18,14 +18,13 @@ Join the community on discord: https://discord.gg/4enDY8yhuS
 - ⚙️ Fully client-side – works offline, no data uploaded
 - 🧩 One single HTML file – easy to use, no setup or install
 - 🖌️ Perfect for UI/UX designers, frontend developers, CSS tweaking, and web color matching
+- 🔒 Privacy & Security
+   - 100% client-side.
+   - No internet connection needed.
+   - Your images and data never leave your browser.
+   - Its 100% open source
 
-🔒 Privacy & Security
-- 100% client-side.
-- No internet connection needed.
-- Your images and data never leave your browser.
-- Its 100% open source
-
-🚀 How to Use
+## 🚀 How to Use
 1. Download or clone this repository.
 
 2. Open index.html in any modern browser.
@@ -38,7 +37,7 @@ Join the community on discord: https://discord.gg/4enDY8yhuS
 
 6. Copy the HEX or RGB value to your project.
 
-🧠 Use Cases
+## 🧠 Use Cases
 - Extract UI colors from screenshots or mockups
 
 - Match brand colors from logos or visuals
