@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Image Color Picker</title>
+  <style>
+    body {
+      margin: 0; 
+      padding: 0; 
+      background: #222; 
+      color: #eee; 
+      font-family: Arial, sans-serif;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: flex-start; 
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .uploader {
+      display: flex;
+      align-items: center;
+      margin: 20px;
+      flex-direction: column;
+    }
+
+    .uploader input[type="file"] {
+      border: 1px solid #444;
+      background: #333;
+      color: #eee;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    #canvasContainer {
+      position: relative;
+      margin: 20px;
+      max-width: 90%;
+      max-height: 70vh;
+      border: 1px solid #555;
+      cursor: crosshair;
+    }
+
+    #imageCanvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .colorOutput {
+      margin: 20px;
+      padding: 10px;
+      background: #333;
+      border: 1px solid #555;
+      font-size: 1.5em;
+    }
+
+    .colorSample {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #fff;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Image Color Picker</h1>
+    <p>(Click on the image to pick a color. Or Paste an image with Ctrl+V.)</p>
+  </header>
+
+  <div class="uploader">
+    <input type="file" id="imageInput" accept="image/*">
+  </div>
+
+  <div id="canvasContainer">
+    <canvas id="imageCanvas"></canvas>
+  </div>
+
+  <div class="colorOutput">
+    <div class="colorSample" id="colorSample"></div>
+    <span id="colorValues">Hex: #------ | RGB: (---, ---, ---)</span>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('imageCanvas');
+    const ctx = canvas.getContext('2d');
+    const imageInput = document.getElementById('imageInput');
+    const colorSample = document.getElementById('colorSample');
+    const colorValues = document.getElementById('colorValues');
+
+    // Handle File Input
+    imageInput.addEventListener('change', handleFileSelect);
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      displayImageFile(file);
+    }
+
+    // Display uploaded (or pasted) image in canvas
+    function displayImageFile(file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+        }
+        img.src = evt.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+
+    // Listen for Paste Event
+    window.addEventListener('paste', function(e) {
+      const clipboardItems = e.clipboardData.items;
+      for (let i = 0; i < clipboardItems.length; i++) {
+        const item = clipboardItems[i];
+        if (item.type.indexOf('image') === 0) {
+          const file = item.getAsFile();
+          displayImageFile(file);
+        }
+      }
+    });
+
+    // Click handler on canvas to get color
+    canvas.addEventListener('click', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const pixel = ctx.getImageData(x, y, 1, 1).data;
+      const [r, g, b] = pixel;
+      const hex = rgbToHex(r, g, b);
+      updateColorInfo(r, g, b, hex);
+    });
+
+    function rgbToHex(r, g, b) {
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b)
+        .toString(16).slice(1).toUpperCase();
+    }
+
+    function updateColorInfo(r, g, b, hex) {
+      colorSample.style.backgroundColor = hex;
+      colorValues.textContent = `Hex: ${hex} | RGB: (${r}, ${g}, ${b})`;
+    }
+  </script>
+</body>
+</html>
