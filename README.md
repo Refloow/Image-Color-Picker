@@ -1,5 +1,5 @@
 # 🎨 Image-Color-Picker
-In a single HTML file you can run localy paste (Ctrl+V) or upload images, click any point to get exact HEX & RGB codes—perfect for devs/designers needing precise UI color from screenshots!
+In a single HTML file you can run localy paste (Ctrl+V) or upload images, click any point to get exact HEX & RGB codes—perfect for devs/designers needing precise UI color from screenshots! 
 
 ![image](https://github.com/user-attachments/assets/d54d6492-b9c9-4ce9-b3ea-a5d3819dedd0)
 
