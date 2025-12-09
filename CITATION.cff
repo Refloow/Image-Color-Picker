@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Please credit the official Refloow™ brand using the metadata below."
+title: "Refloow™ Image Color Picker"
+abstract: "The official browser-based image analysis and color picking tool maintained by the Refloow™ Software Organization."
+authors:
+  - name: "Refloow"
+    website: "https://refloow.com"
+    email: "legal@refloow.com"
+  - family-names: "Vuckovic"
+    given-names: "Veljko"
+    affiliation: "Refloow Founder"
+version: 1.0.0
+date-released: 2025-03-26
+license: "MIT"
+url: "https://refloow.com"
+keywords:
+  - "Refloow"
+  - "Refloow™"
+  - "Color Picker"
+  - "HEX"
+  - "RGB"
